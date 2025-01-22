@@ -7,16 +7,24 @@
 </head>
 <body>
     <h1>CORS Test page with an Entra Application Proxy fronting an on-premise web API</h1>
-    <h1>GET with no headers</h1>
+    <p>This page is to demonstate 4 scenarios when calling a web API via Entra Application proxy to see what form of CORS header works correctly</p>
+    
+    <h2>GET with no headers</h2>
+    <p>No CORS headers from the server</p>
+    <pre>
+         @app.route('/api/data', methods=['GET'])
+         def get_data():
+         return jsonify({"message": "Hello, World!"})    
+    </pre>
     <div id="noresponse"></div>
 
-    <h1>GET Specific origin header, but without the protocol</h1>
+    <h2>GET Specific origin header, but without the protocol</h2>
     <div id="noprotocolresponse"></div>
 
-    <h1>GET Specific origin header</h1>
+    <h2>GET Specific origin header</h2>
     <div id="specificresponse"></div>
 
-    <h1>GET * origin header</h1>
+    <h2>GET * origin header</h2>
     <div id="starresponse"></div>
 
     <script>
