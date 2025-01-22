@@ -6,12 +6,18 @@
     <title>GET Request Example</title>
 </head>
 <body>
-    <h1>GET Request Example</h1>
-    <div id="response"></div>
+    <h1>GET No headers</h1>
+    <div id="noresponse"></div>
+
+    <h1>GET Specific headers</h1>
+    <div id="specificresponse"></div>
+
+    <h1>GET Star headers</h1>
+    <div id="starresponse"></div>
 
     <script>
-        // Function to make the GET request
-        function makeGetRequest() {
+        // Functions to make the GET requests
+        function makeSpecificGetRequest() {
             const url = 'https://pythontest-mngenvmcap485016.msappproxy.net/api/corsdata';
             fetch(url)
                 .then(response => response.json())
@@ -21,11 +27,41 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    document.getElementById('response').innerText = 'An error occurred while fetching data.';
+                    document.getElementById('specificresponse').innerText = 'An error occurred while fetching data.';
                 });
         }
 
-        // Make the GET request when the page loads
+        function makeStarGetRequest() {
+            const url = 'https://pythontest-mngenvmcap485016.msappproxy.net/api/corsstardata';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the response data on the page
+                    document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('starresponse').innerText = 'An error occurred while fetching data.';
+                });
+        }
+
+        function makeNoheadersGetRequest() {
+            const url = 'https://pythontest-mngenvmcap485016.msappproxy.net/api/data';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the response data on the page
+                    document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('noresponse').innerText = 'An error occurred while fetching data.';
+                });
+        }
+
+        // Make the GET requests when the page loads
+        window.onload = makeNoheadersGetRequest;
+        window.onload = makeSpecificGetRequest;
         window.onload = makeGetRequest;
     </script>
 </body>
