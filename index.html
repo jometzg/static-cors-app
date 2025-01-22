@@ -27,7 +27,7 @@
                     document.getElementById('response').innerText = JSON.stringify(data, null, 2);
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.log('Error: ', error);
                     document.getElementById('specificresponse').innerText = 'An error occurred while fetching data.';
                 });
         }
@@ -42,7 +42,7 @@
                     document.getElementById('response').innerText = JSON.stringify(data, null, 2);
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.log('Error: ', error);
                     document.getElementById('starresponse').innerText = 'An error occurred while fetching data.';
                 });
         }
@@ -57,15 +57,20 @@
                     document.getElementById('response').innerText = JSON.stringify(data, null, 2);
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.log('Error: ', error);
                     document.getElementById('noresponse').innerText = 'An error occurred while fetching data.';
                 });
         }
 
+        function callAll() {
+            makeNoheadersGetRequest();
+            makeSpecificGetRequest();
+            makeStarGetRequest();
+        }
+        
         // Make the GET requests when the page loads
-        window.onload = makeNoheadersGetRequest;
-        window.onload = makeSpecificGetRequest;
-        window.onload = makeStarGetRequest;
+        window.onload = callAll;
+
     </script>
 </body>
 </html>
