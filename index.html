@@ -6,25 +6,49 @@
     <title>CORS Test Example</title>
 </head>
 <body>
-    <h1>CORS Test page with an Entra Application Proxy fronting an on-premise web API</h1>
+    <h1>CORS Test page with an Entra Application Proxy</h1>
     <p>This page is to demonstate 4 scenarios when calling a web API via Entra Application proxy to see what form of CORS header works correctly</p>
     
     <h2>GET with no headers</h2>
     <p>No CORS headers from the server</p>
     <pre>
-         @app.route('/api/data', methods=['GET'])
+    @app.route('/api/data', methods=['GET'])
          def get_data():
          return jsonify({"message": "Hello, World!"})    
     </pre>
     <div id="noresponse"></div>
 
     <h2>GET Specific origin header, but without the protocol</h2>
+    <p>The correct origin from the server, but no protocol</p>
+    <pre>
+    @app.route('/api/corsnoprotocoldata', methods=['GET'])
+        def get_corsnoprotocoldata():
+        response = make_response(jsonify({"message": "Hello, World!"}))
+        response.headers['Access-Control-Allow-Origin'] = 'agreeable-mud-0bea1841e.4.azurestaticapps.net'
+        return response   
+    </pre>
     <div id="noprotocolresponse"></div>
 
     <h2>GET Specific origin header</h2>
+    <p>The correct origin with the protocol (HTTPS) from the server</p>
+    <pre>
+    @app.route('/api/corsdata', methods=['GET'])
+        def get_corsdata():
+        response = make_response(jsonify({"message": "Hello, World!"}))
+        response.headers['Access-Control-Allow-Origin'] = 'https://agreeable-mud-0bea1841e.4.azurestaticapps.net'
+        return response   
+    </pre>
     <div id="specificresponse"></div>
 
     <h2>GET * origin header</h2>
+    <p>Using the * wildcard header</p>
+    <pre>
+    @app.route('/api/corsstardata', methods=['GET'])
+        def get_corsstardata():
+        response = make_response(jsonify({"message": "Hello, World!"}))
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response   
+    </pre>
     <div id="starresponse"></div>
 
     <script>
