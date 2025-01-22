@@ -6,13 +6,16 @@
     <title>GET Request Example</title>
 </head>
 <body>
-    <h1>GET No headers</h1>
+    <h1>GET with no headers</h1>
     <div id="noresponse"></div>
 
-    <h1>GET Specific headers</h1>
+    <h1>GET Specific origin header, but without the protocol</h1>
+    <div id="noprotocolresponse"></div>
+
+    <h1>GET Specific origin header</h1>
     <div id="specificresponse"></div>
 
-    <h1>GET Star headers</h1>
+    <h1>GET * origin header</h1>
     <div id="starresponse"></div>
 
     <script>
@@ -29,6 +32,21 @@
                 .catch(error => {
                     console.log('Error: ', error);
                     document.getElementById('specificresponse').innerText = 'An error occurred while fetching data.';
+                });
+        }
+
+        function makeNoProtocolGetRequest() {
+            const url = 'https://pythontest-mngenvmcap485016.msappproxy.net/api/corsnoprotocoldata';
+            console.log('Calling: ', url);
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the response data on the page
+                    document.getElementById('noprotocolresponse').innerText = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.log('Error: ', error);
+                    document.getElementById('noprotocolresponse').innerText = 'An error occurred while fetching data.';
                 });
         }
 
@@ -64,6 +82,7 @@
 
         function callAll() {
             makeNoheadersGetRequest();
+            makeNoProtocolGetRequest();
             makeSpecificGetRequest();
             makeStarGetRequest();
         }
