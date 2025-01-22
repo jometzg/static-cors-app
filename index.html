@@ -19,6 +19,7 @@
         // Functions to make the GET requests
         function makeSpecificGetRequest() {
             const url = 'https://pythontest-mngenvmcap485016.msappproxy.net/api/corsdata';
+            console.log('Calling: ', url);
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -33,6 +34,7 @@
 
         function makeStarGetRequest() {
             const url = 'https://pythontest-mngenvmcap485016.msappproxy.net/api/corsstardata';
+            console.log('Calling: ', url);
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -47,6 +49,7 @@
 
         function makeNoheadersGetRequest() {
             const url = 'https://pythontest-mngenvmcap485016.msappproxy.net/api/data';
+            console.log('Calling: ', url);
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -62,7 +65,7 @@
         // Make the GET requests when the page loads
         window.onload = makeNoheadersGetRequest;
         window.onload = makeSpecificGetRequest;
-        window.onload = makeGetRequest;
+        window.onload = makeStarGetRequest;
     </script>
 </body>
 </html>
